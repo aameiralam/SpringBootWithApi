@@ -1,6 +1,8 @@
 package com.springApaLearning.monster_trainer.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +10,7 @@ import lombok.*;
 //lombok does this for us
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -30,5 +33,9 @@ public class Monster {
     @Column(nullable = false)
     private Long defensePower;
 
+    @ManyToOne
+    @JsonIgnore //stops the infinite loop created by the foreign key when sent to the front end
+    @ToString.Exclude // stops the infinite loop in the back end
+    private Trainer trainer;
 
 }

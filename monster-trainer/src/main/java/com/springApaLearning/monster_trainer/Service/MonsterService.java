@@ -12,4 +12,15 @@ public interface MonsterService {
 
     Monster getMonsterById(Long id);
 
+    List <Monster> getMonsterBySpeciesType(String species);
+
+    List<Monster> getMonsterWithPriceGreaterThan(Double price);
+
+    // for testing tdd
+
+    Monster updateMonster(Monster monster);
+
+    //To delete
+
+    void  deleteMonster(Long id);
 }
