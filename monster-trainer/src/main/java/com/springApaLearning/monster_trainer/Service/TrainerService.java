@@ -13,5 +13,9 @@ public interface TrainerService {
 
     Trainer getTrainerById(Long id);
 
+    Trainer updateTrainer(Trainer trainer);
+
+    void deleteTrainer(Trainer trainer);
+
 
 }

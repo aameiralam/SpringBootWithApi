@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-@Service
+@Service("ADMIN")
 public class TrainerServiceImpl implements TrainerService {
 
 
@@ -18,7 +18,7 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public Trainer saveTrainer(Trainer trainer) {
-       return trainerRepository.save(trainer);
+        return trainerRepository.save(trainer);
     }
 
     @Override
@@ -28,7 +28,22 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public Trainer getTrainerById(Long id) {
-         return trainerRepository.findById(id).orElseThrow(()->
-                 new EntityNotFoundException("Trainer with the ID" + id + "has not been found"));
+        return trainerRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Trainer with the ID" + id + "has not been found"));
+    }
+
+    @Override
+    public Trainer updateTrainer(Trainer trainer) {
+        Trainer oldTrainerData = trainerRepository.findById(trainer.getId()).orElseThrow(() ->
+                new EntityNotFoundException("Id not found"));
+        return trainerRepository.save(trainer);
+    }
+
+    @Override
+    public void deleteTrainer(Trainer trainer) {
+        Trainer oldTrainerData = trainerRepository.findById(trainer.getId()).orElseThrow(() ->
+                new EntityNotFoundException("Id not found"));
+                trainerRepository.delete(trainer);
     }
 }
+

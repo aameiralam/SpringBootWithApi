@@ -4,12 +4,14 @@ import com.springApaLearning.monster_trainer.Entity.Monster;
 import com.springApaLearning.monster_trainer.Repository.MonsterRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Primary //specifies this class as the primary bean
 public class MonsterServiceImpl implements MonsterService {
 
 
@@ -57,9 +59,7 @@ public class MonsterServiceImpl implements MonsterService {
     }
 
     @Override
-    public void deleteMonster(Long id) {
-
-
+    public void deleteMonster(Long id){
         if(!monsterRepository.existsById(id)) throw new EntityNotFoundException("Monster with ID" + id
         + "has not been found"); //if exception thrown it goes to the next line
         monsterRepository.deleteById(id);

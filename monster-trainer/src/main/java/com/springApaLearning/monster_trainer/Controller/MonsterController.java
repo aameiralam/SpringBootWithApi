@@ -49,6 +49,17 @@ public class MonsterController {
         return ResponseEntity.ok(monsterService.getMonsterWithPriceGreaterThan(price));
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Monster> postUpdateMonster(@RequestBody Monster monster){
+        return ResponseEntity.ok(monsterService.updateMonster(monster));
+    }
+
+    @DeleteMapping("/delete/{id}") //we have void which is why ? is used
+    public ResponseEntity<?> postDeleteMonster(@PathVariable Long id){
+         monsterService.deleteMonster(id);
+         return  ResponseEntity.ok().body("Monster has been deleted");
+    }
+
 
 
 }

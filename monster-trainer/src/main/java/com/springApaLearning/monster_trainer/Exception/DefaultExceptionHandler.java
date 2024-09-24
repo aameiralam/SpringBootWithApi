@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class DefaultExceptionHandler {
 
-    @ExceptionHandler(EntityNotFoundException.class)
+    @ExceptionHandler({EntityNotFoundException.class, UserNotFoundException.class})
 
     public ResponseEntity<ApiError> exceptionHandler(EntityNotFoundException e, HttpServletRequest request){
         ApiError apiError = new ApiError(
