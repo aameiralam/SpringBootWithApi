@@ -60,6 +60,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.12.6</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 		<dependency>
 			<groupId>org.mockito</groupId>
