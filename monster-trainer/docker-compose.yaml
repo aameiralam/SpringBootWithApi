@@ -1,0 +1,40 @@
+version: '3.9' #tells the docker which version is used
+
+services:  #tells which services or containers are used like mysql, api
+  mysql:   #1st container
+    image: mysql:8.0.38                            #specify which mysql version
+    restart: unless-stopped                        #will keep restarting if some error occurs
+    networks:                                      #has to be monsterTrainer network which is our application. Bridge between two containers
+      - monsterTrainer
+    environment:                                   #specifies specific properties which are below
+      MYSQL_ROOT_PASSWORD: Chittagong100!
+      MYSQL_DATABASE: monster_trainer
+      MYSQL_USER: mtDbUser
+      MYSQL_PASSWORD: Chittagong100!
+    ports:
+      - "3306:3306"   #port to your pc to port to your docker container - mysql
+    volumes:
+      - db:/lib/mysql      #store database inside our virtualMachine, it is a storage
+  api:       #2nd container
+    depends_on:  #mysql container has to be on before api is on
+      - mysql
+    build: ./       #go to the root folder monsterTrainer  and find the docker file
+    restart: on-failure             #restarting
+    networks:                       #bridging the connection between 2 containers
+      - monsterTrainer
+    ports:                          #pc to docker
+      - "8080:8080"
+    volumes:                        #stores in vm
+      - .m2:/root/.m2
+    environment:                    #specify the datasource in env variables, overrides the datasource in dockerFile
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/monster_trainer?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDateTimeCode=false
+      SPRING_DATASOURCE_USERNAME: mtDbUser
+      SPRING_DATASOURCE_PASSWORD: Chittagong100!
+
+    stdin_open: true     #if not written, refuses the connection
+    tty: true
+networks:                #establish the network
+  monsterTrainer:
+
+volumes:                 #establish the db volume
+  db:
