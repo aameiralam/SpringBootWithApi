@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface UserCredentialRepo extends ListCrudRepository<UserCredential, Long> {
     Optional<UserCredential> findByEmail(String email);
-
+// This method is a custom query method for finding a UserCredential by its email.
 
 }
